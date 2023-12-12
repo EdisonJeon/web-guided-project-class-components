@@ -2,6 +2,7 @@ import React from "react";
 
 class Person extends React.Component {
   render() {
+    console.log("CLASS COMPONENT: ***Person*** has fired.");
     return (
       <div>
         <h1>Hello {this.props.name}.</h1>
@@ -12,29 +13,30 @@ class Person extends React.Component {
       </div>
     );
   }
-} 
+}
 
 class AppClass extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: "Warren"
+      name: "Warren",
     };
   }
 
   handleNameButtonClick = (e) => {
-    this.setState({
-      ...this.state,
-      name: "Allison"
-    });
+    if (this.state.name === "Warren")
+      this.setState({ ...this.state, name: "Allison" });
+    else this.setState({ ...this.state, name: "Warren" });
   };
 
-
   render() {
+    console.log("CLASS COMPONENT: ***AppClass*** has fired.");
     return (
       <div>
         <Person name={this.state.name} />
-        <button onClick={this.handleNameButtonClick}>MAKE IS ALLISON</button>
+        <button onClick={this.handleNameButtonClick}>{`MAKE IT ${
+          this.state.name === "Warren" ? "ALLISON" : "WARREN"
+        }`}</button>
       </div>
     );
   }
